@@ -1,0 +1,28 @@
+#cache calculator
+
+make_matrix <- function(x=matrix()) {
+  inv <- NULL
+  set <- function(y) {
+    y <<- x
+    inv <- NULL }
+  get <- function()x
+  setinv <- function(inverse)inv<<-inverse                        #function to inverse the matrix
+  getinverse <- function(){
+    inver <- ginv(x)
+    ginv%%x
+  }
+  list(set=set,get=get, setinv=setinv, getinv=getinv)
+}
+
+solver <- function(x,...)
+{ 
+  inv<- x$getinv()
+  if(!is.null(m)) {
+    message("geting cache from preveous")
+    return(inv)
+  }
+  data <- x$get()
+  inv <- solve(data, ...)                         #calculates inverse values
+  x$setinv(inv)
+  inv
+}
